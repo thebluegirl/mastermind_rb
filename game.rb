@@ -1,5 +1,5 @@
 module GameAssets
-  PEG_COLORS = 
+  PEG_COLOURS = 
     ["red", "yellow", "orange", "blue", "purple", "green", "white", "black"]
 
 end
