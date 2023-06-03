@@ -7,23 +7,30 @@ class HumanDecoder
 
   def decode_attempt
     puts "The available colours are: \nred, orange, yellow, blue, purple, green, white, black"
-    make_guess
+    turn_guess
     return @guess_array
   end
 
-  def make_guess
+   def colour_guess
+    colour = gets.chomp.downcase
+    if GameAssets::PEG_COLOURS.any?(colour)
+      return colour
+    else
+      puts "That is not a valid colour. Please only put valid colours."
+      colour_guess
+      return 
+    end
+   end
+  
+  def turn_guess
     @guess_array.each_with_index do |guess, idx|
       puts "What's colour #{idx + 1}?"
-      colour = gets.chomp.downcase
-      if GameAssets::PEG_COLOURS.any?(colour)
-        @guess_array[idx] = colour
-      else
-        puts "That is not a valid colour. Please only put valid colours."
-        make_guess 
-        return
-      end
+      guess_array[idx] = colour_guess 
     end
   end
+
+  protected
+  attr_accessor :guess_array
 end
 
 HumanDecoder.new.decode_attempt
