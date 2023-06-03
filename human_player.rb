@@ -1,17 +1,29 @@
 require './game.rb'
 
-module HumanPlayer
-  include GameAssets
+class HumanDecoder
+  def initialize
+    @guess_array = Array.new(4)
+  end
 
-  def HumanPlayer.guess_input
-    guess_array = Array.new(4)
-    puts "What's your guess for each colour?"
-    guess_array.each_with_index do |colour, idx|
-      puts "Colour #{idx + 1}?"
-      colour_guess = gets.chomp.downcase
-      guess_array[idx] = colour_guess
+  def decode_attempt
+    puts "The available colours are: \nred, orange, yellow, blue, purple, green, white, black"
+    make_guess
+    return @guess_array
+  end
+
+  def make_guess
+    @guess_array.each_with_index do |guess, idx|
+      puts "What's colour #{idx + 1}?"
+      colour = gets.chomp.downcase
+      if GameAssets::PEG_COLOURS.any?(colour)
+        @guess_array[idx] = colour
+      else
+        puts "That is not a valid colour. Please only put valid colours."
+        make_guess 
+        return
+      end
     end
   end
 end
 
-HumanPlayer.guess_input
+HumanDecoder.new.decode_attempt

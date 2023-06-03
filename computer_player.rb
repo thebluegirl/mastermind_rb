@@ -1,11 +1,10 @@
 require './game.rb'
 
-module ComputerPlayer
-  include GameAssets
+class ComputerEncoder
+  attr_reader :code
 
-  def ComputerPlayer.create_code
-    p PEG_COLOURS.sample(4)
+  def initialize
+    @code = GameAssets::create_code
   end
+  
 end
-
-ComputerPlayer.create_code()
