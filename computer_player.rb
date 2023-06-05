@@ -1,4 +1,4 @@
-require './game.rb'
+require './assets.rb'
 
 class ComputerEncoder
   attr_reader :code

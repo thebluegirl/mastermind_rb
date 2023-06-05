@@ -1,16 +1,18 @@
 require './computer_player.rb'
-
-module GameAssets
-  PEG_COLOURS = 
-    ["red", "yellow", "orange", "blue", "purple", "green", "white", "black"]
-
-end
+require './human_player.rb'
 
 class Game
   attr_accessor :decode_board
   def initialize
     @decode_board = Array.new(10)
+    @computer = ComputerEncoder.new
+    @human = HumanDecoder.new
   end
 
-  code = ComputerEncoder.new.code
+  def human_guesser
+    @decode_board.each_with_index do |variable|
+      
+    end
+  end
+
 end
