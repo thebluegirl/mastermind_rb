@@ -10,9 +10,20 @@ class Game
   end
 
   def human_guesser
-    @decode_board.each_with_index do |variable|
-      
+    @decode_board.each_with_index do |turn, idx|
+      puts "This is turn #{idx + 1}. You have #{10 - idx} attempts left"
+      turn = @human.decode_attempt
+
+      if turn == @computer.code
+        puts "You cracked the code!"
+        return
+      else
+        puts "No... That's not it..."
+      end
     end
   end
 
 end
+
+game = Game.new
+game.human_guesser

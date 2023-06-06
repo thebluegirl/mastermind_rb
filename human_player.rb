@@ -33,4 +33,4 @@ class HumanDecoder
   attr_accessor :guess_array
 end
 
-HumanDecoder.new.decode_attempt
+# HumanDecoder.new.decode_attempt
