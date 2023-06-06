@@ -6,7 +6,9 @@ class HumanDecoder
   end
 
   def decode_attempt
-    puts "The available colours are: \nred, orange, yellow, blue, purple, green, white, black"
+    puts "The available colours are:"
+    GameAssets::PEG_COLOURS.each { |colour| print "#{colour} " }
+    print "\n"
     turn_guess
     return @guess_array
   end
