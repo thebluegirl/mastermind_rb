@@ -2,6 +2,23 @@ require './computer_player.rb'
 require './human_player.rb'
 
 class Game
+  def gameplay_type
+    puts "Welcome to mastermind! Would you like to be the encoder or the decoder?"
+    gameplay = gets.chomp.downcase
+  
+    if gameplay == "e" || gameplay_type == "encoder"
+      ComputerCode.new.human_guesser
+    elsif gameplay == "d" || gameplay_type == "decoder"
+      
+    else
+      puts "Please put in a valid option."
+      gameplay_type
+      return
+    end
+  end
+end
+
+class ComputerCode
   def initialize
     @decode_board = Array.new(10)
     @computer = ComputerEncoder.new
@@ -42,5 +59,5 @@ class Game
   attr_accessor :decode_board
 end
 
-game = Game.new
+game = ComputerCode.new
 game.human_guesser
