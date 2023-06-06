@@ -22,16 +22,16 @@ class Game
           feedback_number = compare(colour_guess, index)
           feedback_arr << feedback_number
         end
-        feedback_arr.sort.each { |num| print num.to_s }
+        feedback_arr.sort.reverse.each { |num| print num.to_s }
         print "\n"
       end
     end
   end
 
   def compare(guess, idx)
-    if guess[idx] == @computer.code[idx]
+    if guess == @computer.code[idx]
       return 2
-    elsif @computer.code.any?(guess[idx])
+    elsif @computer.code.any?(guess)
       return 1
     else
       return 0

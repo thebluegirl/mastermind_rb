@@ -34,5 +34,3 @@ class HumanDecoder
   protected
   attr_accessor :guess_array
 end
-
-# HumanDecoder.new.decode_attempt
