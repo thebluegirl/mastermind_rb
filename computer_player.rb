@@ -9,7 +9,7 @@ class ComputerEncoder
   
 end
 
-class ComputerDecode
+class ComputerDecoder
   def initialize
     @guess_array = Array.new
   end

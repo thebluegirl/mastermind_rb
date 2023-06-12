@@ -7,9 +7,9 @@ class Game
     gameplay = gets.chomp.downcase
   
     if gameplay == "e" || gameplay_type == "encoder"
-      ComputerCoder.new.human_guesser
+      HumanCoder.new.computer_decode
     elsif gameplay == "d" || gameplay_type == "decoder"
-      HumanCoder.new
+      ComputerCoder.new.human_guesser
     else
       puts "Please put in a valid option."
       gameplay_type
@@ -60,14 +60,40 @@ class ComputerCoder
 end
 
 class HumanCoder
+  attr_accessor :decode_board, :initial_guess
+
   def initialize
     @human_player = HumanEncoder.new
     @computer_player = ComputerDecoder.new
     @decode_board = Array.new(10)
+    @code = @human_player.create_code
+    @initial_guess = @computer_player.initial_code_guess
   end
 
-  @human_player.create_code
+  def computer_decode
+    if @initial_guess == @code
+      puts "Your code has been decoded! You lose :("
+    else
+      puts "Something else"
+    end
+  end
+
+  def decode_attempt
+    @initial_guess.each_with_index do |guess, idx|
+      if @initial_guess[idx] == @code[idx]
+        return @initial_guess[idx]
+      else
+        @initial_guess[idx] = unique_colour
+      end
+    end
+  end
+
+  def unique_colour
+    new_colour = GameAssets::PEG_COLOURS.sample
+    @initial_guess.any?(new_colour) ? unique_colour : new_colour
+    return
+  end
 end
 
-game = ComputerCoder.new
-game.human_guesser
+game = Game.new
+game.gameplay_type
