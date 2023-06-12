@@ -18,7 +18,6 @@ class HumanDecoder
     if GameAssets::PEG_COLOURS.any?(colour)
       return colour
     else
-      puts "That is not a valid colour. Please only put valid colours."
       colour_guess
       return 
     end
@@ -33,4 +32,41 @@ class HumanDecoder
 
   protected
   attr_accessor :guess_array
+end
+
+
+class HumanEncoder
+  attr_accessor :code_array
+
+  def initialize
+    @code_array = Array.new(4)
+  end
+
+  def intro
+    puts "Please create a code of four unique colours"
+    puts "The available colours are:"
+    GameAssets::PEG_COLOURS.each { |colour| print "#{colour} " }
+    print "\n"
+  end
+
+  def create_code
+    intro
+    @code_array.each_with_index do |code, idx|
+      puts "What is colour #{idx + 1}?"
+      @code_array[idx] = colour_code
+    end
+    return @code_array
+  end
+
+  def colour_code
+    colour = gets.chomp.downcase
+    if GameAssets::PEG_COLOURS.any?(colour)
+      return colour
+    else
+      puts "That is not a valid colour. Please only put valid colours."
+      colour_check
+      return
+    end
+  end
+
 end

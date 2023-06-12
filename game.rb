@@ -7,9 +7,9 @@ class Game
     gameplay = gets.chomp.downcase
   
     if gameplay == "e" || gameplay_type == "encoder"
-      ComputerCode.new.human_guesser
+      ComputerCoder.new.human_guesser
     elsif gameplay == "d" || gameplay_type == "decoder"
-      
+      HumanCoder.new
     else
       puts "Please put in a valid option."
       gameplay_type
@@ -18,7 +18,7 @@ class Game
   end
 end
 
-class ComputerCode
+class ComputerCoder
   def initialize
     @decode_board = Array.new(10)
     @computer = ComputerEncoder.new
@@ -59,5 +59,15 @@ class ComputerCode
   attr_accessor :decode_board
 end
 
-game = ComputerCode.new
+class HumanCoder
+  def initialize
+    @human_player = HumanEncoder.new
+    @computer_player = ComputerDecoder.new
+    @decode_board = Array.new(10)
+  end
+
+  @human_player.create_code
+end
+
+game = ComputerCoder.new
 game.human_guesser

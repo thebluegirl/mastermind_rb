@@ -8,3 +8,13 @@ class ComputerEncoder
   end
   
 end
+
+class ComputerDecode
+  def initialize
+    @guess_array = Array.new
+  end
+
+  def initial_code_guess
+    @guess_array = GameAssets::PEG_COLOURS.sample(4)
+  end
+end
