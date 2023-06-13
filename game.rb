@@ -6,12 +6,12 @@ class Game
     puts "Welcome to mastermind! Would you like to be the encoder or the decoder?"
     gameplay = gets.chomp.downcase
   
-    if gameplay == "e" || gameplay_type == "encoder"
+    if gameplay == "e" || gameplay == "encoder"
       HumanCoder.new.decode_attempt
-    elsif gameplay == "d" || gameplay_type == "decoder"
+    elsif gameplay == "d" || gameplay == "decoder"
       ComputerCoder.new.human_guesser
     else
-      puts "Please put in a valid option."
+      puts "That is not a valid option. Please put in a valid option."
       gameplay_type
       return
     end
@@ -60,7 +60,7 @@ class ComputerCoder
 end
 
 class HumanCoder
-  attr_accessor :decode_board, :initial_guess
+  attr_accessor :decode_board, :initial_guess, :computer_winner
   attr_reader :code
 
   def initialize
@@ -69,6 +69,7 @@ class HumanCoder
     @decode_board = Array.new(10)
     @code = @human_player.create_code
     @initial_guess = @computer_player.initial_code_guess
+    @computer_winner = false
   end
 
   def print_guess(array)
@@ -92,6 +93,7 @@ class HumanCoder
     if @initial_guess.any?(new_colour)
       unique_colour
     else
+      p new_colour
       return new_colour
     end
   end
@@ -113,11 +115,17 @@ class HumanCoder
 
         if guess_check
           puts "Your code has been decoded! You lose :("
+          @computer_winner = true
           return
         else
           guess_change
         end
       end
+
+      if !@computer_winner
+        puts "The computer failed to decode your secret code! You win!!!"
+      end
+
     end
   end
 

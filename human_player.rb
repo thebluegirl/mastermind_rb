@@ -67,7 +67,7 @@ class HumanEncoder
       return colour
     else
       puts "That is not a valid colour. Please only put valid colours."
-      colour_check
+      colour_code
       return
     end
   end
