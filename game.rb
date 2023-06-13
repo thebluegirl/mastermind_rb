@@ -7,7 +7,7 @@ class Game
     gameplay = gets.chomp.downcase
   
     if gameplay == "e" || gameplay_type == "encoder"
-      HumanCoder.new.computer_decode
+      HumanCoder.new.decode_attempt
     elsif gameplay == "d" || gameplay_type == "decoder"
       ComputerCoder.new.human_guesser
     else
@@ -61,6 +61,7 @@ end
 
 class HumanCoder
   attr_accessor :decode_board, :initial_guess
+  attr_reader :code
 
   def initialize
     @human_player = HumanEncoder.new
@@ -70,29 +71,56 @@ class HumanCoder
     @initial_guess = @computer_player.initial_code_guess
   end
 
-  def computer_decode
-    if @initial_guess == @code
-      puts "Your code has been decoded! You lose :("
-    else
-      puts "Something else"
-    end
+  def print_guess(array)
+    array.each { |colour| print "#{colour} " }
+    print "\n"
   end
 
-  def decode_attempt
+  def guess_change
     @initial_guess.each_with_index do |guess, idx|
-      if @initial_guess[idx] == @code[idx]
-        return @initial_guess[idx]
+      if guess == @code[idx]
+        return
       else
-        @initial_guess[idx] = unique_colour
+        guess = unique_colour
+        @initial_guess[idx] = guess
       end
     end
   end
 
   def unique_colour
     new_colour = GameAssets::PEG_COLOURS.sample
-    @initial_guess.any?(new_colour) ? unique_colour : new_colour
-    return
+    if @initial_guess.any?(new_colour)
+      unique_colour
+    else
+      return new_colour
+    end
   end
+
+  def guess_check
+    if @initial_guess == @code
+      return true
+    else
+      return false
+    end
+  end
+
+  def decode_attempt
+    until @decode_board.last != nil
+      @decode_board.each_with_index do |slot, index|
+        puts "Computer attempt #{index + 1} of #{@decode_board.count}"
+        print_guess(@initial_guess)
+        @decode_board[index] = @initial_guess
+
+        if guess_check
+          puts "Your code has been decoded! You lose :("
+          return
+        else
+          guess_change
+        end
+      end
+    end
+  end
+
 end
 
 game = Game.new

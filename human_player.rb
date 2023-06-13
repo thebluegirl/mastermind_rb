@@ -55,6 +55,9 @@ class HumanEncoder
       puts "What is colour #{idx + 1}?"
       @code_array[idx] = colour_code
     end
+    puts "Your code is:"
+    @code_array.each { |colour| print "#{colour} " }
+    print "\n"
     return @code_array
   end
 
