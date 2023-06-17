@@ -74,9 +74,10 @@ class HumanEncoder
       return colour
     else
       puts "That is not a valid colour. Please only put valid colours."
-      colour_code
-      return
+      colour = colour_code
     end
+
+    return colour
   end
 
 end

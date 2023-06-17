@@ -81,30 +81,26 @@ class HumanCoder
   def guess_change
     @initial_guess.each_with_index do |guess, idx|
       if guess == @code[idx]
-        return
+        next
       else
         guess = unique_colour
         @initial_guess[idx] = guess
       end
     end
+    return @initial_guess
   end
 
   def unique_colour
     new_colour = GameAssets::PEG_COLOURS.sample
     if @initial_guess.any?(new_colour)
-      unique_colour
+      new_colour = unique_colour
     else
-      p new_colour
       return new_colour
     end
   end
 
   def guess_check
-    if @initial_guess == @code
-      return true
-    else
-      return false
-    end
+    @initial_guess == @code ? true : false
   end
 
   def decode_attempt
