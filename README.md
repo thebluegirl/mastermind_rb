@@ -1,6 +1,6 @@
 # mastermind_rb
 
-This [(project)https://www.theodinproject.com/lessons/ruby-mastermind] is a part of [(The Odin Project)https://www.theodinproject.com/]'s curriculum.
+This [project](https://www.theodinproject.com/lessons/ruby-mastermind) is a part of [The Odin Project](https://www.theodinproject.com/) curriculum.
 
 You can play as either the encoder, who makes a code of four unique colours, or the decoder, who must correctly guess what the code composed of four unique colours are.
 
