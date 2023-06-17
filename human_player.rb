@@ -15,12 +15,12 @@ class HumanDecoder
 
    def colour_guess
     colour = gets.chomp.downcase
-    if GameAssets::PEG_COLOURS.any?(colour)
-      return colour
-    else
-      colour_guess
-      return 
+    
+    unless GameAssets::PEG_COLOURS.any?(colour)
+      puts "That is not a valid colour. Please put in a valid colour option"
+      colour = colour_guess
     end
+    return colour
    end
   
   def turn_guess
@@ -28,6 +28,11 @@ class HumanDecoder
       puts "What's colour #{idx + 1}?"
       guess_array[idx] = colour_guess 
     end
+
+    print "\n"
+    puts "Your guess this turn is:"
+    @guess_array.each { |colour| print "#{colour} " }
+    print "\n"
   end
 
   protected
@@ -58,11 +63,13 @@ class HumanEncoder
     puts "Your code is:"
     @code_array.each { |colour| print "#{colour} " }
     print "\n"
+    puts " "
     return @code_array
   end
 
   def colour_code
     colour = gets.chomp.downcase
+
     if GameAssets::PEG_COLOURS.any?(colour)
       return colour
     else

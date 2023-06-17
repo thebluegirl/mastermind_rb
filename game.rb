@@ -31,7 +31,7 @@ class ComputerCoder
       turn = @human.decode_attempt
 
       if turn == @computer.code
-        puts "You cracked the code!"
+        puts "You won! You cracked the code!"
         return
       else
         feedback_arr = Array.new
@@ -41,6 +41,7 @@ class ComputerCoder
         end
         feedback_arr.sort.reverse.each { |num| print num.to_s }
         print "\n"
+        puts " "
       end
     end
   end
