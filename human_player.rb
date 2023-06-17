@@ -60,6 +60,12 @@ class HumanEncoder
       puts "What is colour #{idx + 1}?"
       @code_array[idx] = colour_code
     end
+
+    if unique_colour_check(@code_array) == false
+      puts "Your code must be composed of unique colours. There cannot be any repeat colours"
+      @code_array = create_code
+    end
+
     puts "Your code is:"
     @code_array.each { |colour| print "#{colour} " }
     print "\n"
@@ -80,4 +86,11 @@ class HumanEncoder
     return colour
   end
 
+  def unique_colour_check(array)
+    is_unique = true
+    array.each do |colour|
+      array.count(colour) > 1 ? is_unique = false : next
+    end
+    return is_unique
+  end
 end
